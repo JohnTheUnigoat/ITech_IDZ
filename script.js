@@ -8,7 +8,6 @@ var repoTitle = document.getElementById("repo-title");
 var repoInfo = document.getElementById("repo-info");
 
 var userRepoUrl = "https://api.github.com/users/{user}/repos";
-var repoCommitsUrl = "https://api.github.com/repos/{user}/{repo}/commits";
 
 var repos = [];
 
@@ -27,8 +26,6 @@ async function loadRepos() {
     let url = userRepoUrl.replace("{user}", user);
 
     repos = await (await fetch(url)).json();
-
-    console.log(repos);
 
     ulRepos.innerHTML = "";
 
@@ -55,7 +52,8 @@ function loadRepoData(index) {
     repoInfo.innerHTML += `<h3>Last update:</h3>\n<p>${repo.updated_at}</p>`;
 
     loadLanguageData(index);
-    // TODO: add loading commits
+
+    loadCommitData(index);
 }
 
 async function loadLanguageData(index) {
@@ -76,6 +74,27 @@ async function loadLanguageData(index) {
     for (const lang in languages) {
         let langPercentage = Math.round(languages[lang] / langSum * 100);
         ul.innerHTML += `<li>${lang}: ${langPercentage}%</li>`;
+    }
+
+    repoInfo.appendChild(ul);
+}
+
+async function loadCommitData(index) {
+    let url = repos[index].commits_url.replace("{/sha}", "");
+
+    let commits = await (await fetch(url)).json();
+
+    repoInfo.innerHTML += `<h3>Commits</h3>`;
+
+    let ul = document.createElement('ul');
+
+    for (const commit of commits) {
+        let sha = commit.sha.slice(0, 6);
+        let message = commit.commit.message;
+        let date = new Date(commit.commit.committer.date);
+        let dateStr = date.toDateString();
+        let timeStr = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        ul.innerHTML += `<li>${sha}: ${message}<br>Committed at: ${dateStr}, ${timeStr}</li>`;
     }
 
     repoInfo.appendChild(ul);
