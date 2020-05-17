@@ -53,5 +53,30 @@ function loadRepoData(index) {
     repoInfo.innerHTML += `<h3>URL:</h3>\n<p>${repo.url}</p>`;
     repoInfo.innerHTML += `<h3>Created:</h3>\n<p>${repo.created_at}</p>`;
     repoInfo.innerHTML += `<h3>Last update:</h3>\n<p>${repo.updated_at}</p>`;
-    // TODO: add loading languages and commits
+
+    loadLanguageData(index);
+    // TODO: add loading commits
+}
+
+async function loadLanguageData(index) {
+    let url = repos[index].languages_url;
+
+    let languages = await (await fetch(url)).json();
+
+    let langSum = 0;
+
+    for (const lang in languages) {
+        langSum += languages[lang];
+    }
+
+    repoInfo.innerHTML += `<h3>Languages</h3>`;
+
+    let ul = document.createElement('ul');
+
+    for (const lang in languages) {
+        let langPercentage = Math.round(languages[lang] / langSum * 100);
+        ul.innerHTML += `<li>${lang}: ${langPercentage}%</li>`;
+    }
+
+    repoInfo.appendChild(ul);
 }
