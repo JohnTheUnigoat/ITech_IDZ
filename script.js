@@ -31,8 +31,8 @@ async function loadRepos() {
 
     for (let i = 0; i < repos.length; i++) {
         let repoDiv = document.createElement("div");
-        repoDiv.className = "repo";
-        repoDiv.innerHTML = repos[i].name;
+        repoDiv.className = "repo-panel";
+        repoDiv.innerHTML = `<div class="repo">${repos[i].name}</div>`;
 
         repoDiv.addEventListener("click", () => loadRepoData(i));
 

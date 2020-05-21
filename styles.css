@@ -15,8 +15,13 @@ main {
     margin: auto;
 }
 
+#input {
+    display: flex;
+    justify-content: space-between;
+}
+
 #user {
-    width: 79%;
+    width: 79.5%;
     padding: 0.6em;
     font-size: 1.1em;
     box-sizing: border-box;
@@ -28,12 +33,12 @@ main {
 
 #get-repos {
     box-sizing: border-box;
-    width: 20%;
+    width: 19.5%;
     font-size: 1.1em;
     padding: 0.6em;
     color: #eee;
     background-color: #333;
-    border: 1px var(--accent-color) solid;
+    border: 1.5px var(--accent-color) solid;
     border-radius: 0.5em;
     transition: 0.3s;
 }
@@ -50,14 +55,19 @@ main {
     flex-wrap: wrap;
 }
 
+.repo-panel {
+    width: 25%;
+    padding: 0.3em;
+    box-sizing: border-box;
+}
+
 .repo {
+    width: 100%;
     font-weight: bold;
     box-sizing: border-box;
-    padding: 0.5em;
-    margin-bottom: 1em;
-    border: 1px var(--accent-color) solid;
+    border: 1.5px var(--accent-color) solid;
     border-radius: 5px;
-    width: 24%;
+    padding: 0.5em;
     overflow: hidden;
     transition: 0.3s;
 }
@@ -69,13 +79,13 @@ main {
 
 #table-container {
     border-radius: 0.5em;
-    border: 1px solid var(--accent-color);
+    border: 1.5px solid var(--accent-color);
     padding: 0;
     overflow: hidden;
 }
 
 #commit-table {
-    width: 101%;
+    width: 100%;
     table-layout: auto;
     border-collapse: collapse;
 }
