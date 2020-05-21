@@ -1,0 +1,99 @@
+:root {
+    background-color: #333;
+    color: #eee;
+    --font: Verdana, Geneva, Tahoma, sans-serif;
+    --accent-color: #ffa703;
+    font-family: var(--font);
+}
+
+:focus {
+    outline: none;
+}
+
+main {
+    width: 80%;
+    margin: auto;
+}
+
+#user {
+    width: 79%;
+    padding: 0.6em;
+    font-size: 1.1em;
+    box-sizing: border-box;
+    color: white;
+    background-color: #444;
+    border: 1px solid #333;
+    border-radius: 0.5em;
+}
+
+#get-repos {
+    box-sizing: border-box;
+    width: 20%;
+    font-size: 1.1em;
+    padding: 0.6em;
+    color: #eee;
+    background-color: #333;
+    border: 1px var(--accent-color) solid;
+    border-radius: 0.5em;
+    transition: 0.3s;
+}
+
+#get-repos:hover {
+    background-color: var(--accent-color);
+    color: black;
+}
+
+#repos {
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.repo {
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: 1px var(--accent-color) solid;
+    border-radius: 5px;
+    width: 24%;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.repo:hover {
+    background-color: var(--accent-color);
+    color: black;
+}
+
+#table-container {
+    border-radius: 0.5em;
+    border: 1px solid var(--accent-color);
+    padding: 0;
+    overflow: hidden;
+}
+
+#commit-table {
+    width: 101%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+#commit-table * {
+    padding: 0.5em 1em
+}
+
+#commit-table th {
+    padding: 0.6em 1em;
+}
+
+
+#commit-table th {
+    color: #111;
+    background-color: var(--accent-color);
+}
+
+#commit-table tr:nth-child(odd) {
+    background-color: #444;
+}

@@ -30,12 +30,13 @@ async function loadRepos() {
     ulRepos.innerHTML = "";
 
     for (let i = 0; i < repos.length; i++) {
-        let li = document.createElement("li");
-        li.innerHTML = repos[i].name;
+        let repoDiv = document.createElement("div");
+        repoDiv.className = "repo";
+        repoDiv.innerHTML = repos[i].name;
 
-        li.addEventListener("click", () => loadRepoData(i));
+        repoDiv.addEventListener("click", () => loadRepoData(i));
 
-        ulRepos.appendChild(li);
+        ulRepos.appendChild(repoDiv);
     }
 }
 
@@ -86,16 +87,34 @@ async function loadCommitData(index) {
 
     repoInfo.innerHTML += `<h3>Commits</h3>`;
 
-    let ul = document.createElement('ul');
+    let commitTable = document.createElement('table');
+    commitTable.id = "commit-table";
 
-    for (const commit of commits) {
+    let tableDiv = document.createElement("div");
+    tableDiv.id = "table-container";
+
+    let th_row = document.createElement("tr");
+    th_row.innerHTML = "<th>Hash</th><th>Message</th><th>Date</th>";
+
+    commitTable.appendChild(th_row);
+
+    commits.forEach(commit => {
+        let tr = document.createElement("tr");
+
         let sha = commit.sha.slice(0, 6);
         let message = commit.commit.message;
         let date = new Date(commit.commit.committer.date);
         let dateStr = date.toDateString();
         let timeStr = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-        ul.innerHTML += `<li>${sha}: ${message}<br>Committed at: ${dateStr}, ${timeStr}</li>`;
-    }
 
-    repoInfo.appendChild(ul);
+        tr.innerHTML += `<td>${sha}</td>\n`;
+        tr.innerHTML += `<td>${message}</td>\n`;
+        tr.innerHTML += `<td>${dateStr}, ${timeStr}</td>\n`;
+
+        commitTable.appendChild(tr);
+    });
+
+    tableDiv.appendChild(commitTable);
+
+    repoInfo.appendChild(tableDiv);
 }
